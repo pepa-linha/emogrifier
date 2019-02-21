@@ -1062,6 +1062,16 @@ class Emogrifier
     }
 
     /**
+     * Drop all media query types from the allowed list.
+     *
+     * @return void
+     */
+    public function removeAllAllowedMediaTypes()
+    {
+        $this->allowedMediaTypes = [];
+    }
+
+    /**
      * Adds a selector to exclude nodes from emogrification.
      *
      * Any nodes that match the selector will not have their style altered.
