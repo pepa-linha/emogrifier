@@ -1400,6 +1400,18 @@ class Emogrifier
         $css = '';
         /** @var \DOMNode $styleNode */
         foreach ($styleNodes as $styleNode) {
+
+            if ($styleNode instanceof \DOMElement) {
+                /** @var \DOMElement $styleNode */
+                if (!$styleNode->hasAttribute('media')) {
+                    throw new \InvalidArgumentException('Style tag must have defined media attribute.');
+                }
+
+                if (!isset($this->allowedMediaTypes[$styleNode->getAttribute('media')])) {
+                    continue;
+                }
+            }
+
             $css .= "\n\n" . $styleNode->nodeValue;
             $styleNode->parentNode->removeChild($styleNode);
         }
